@@ -6,7 +6,6 @@ import random
 import traceback
 from pyquery import PyQuery as pyq
 import urllib.parse
-<<<<<<< HEAD
 
 def get_cookies_list():
     with open('baidu_code.txt', 'r') as f:
@@ -18,9 +17,6 @@ def get_cookies_list():
     return return_list
 
 cookies_list = get_cookies_list()
-=======
-#
->>>>>>> f0afc0269a0005bdbfa5323f97b2f903ae0a52c5
 
 def get_tiem_url(baidu_cache_url):
     headers = {

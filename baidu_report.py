@@ -13,7 +13,7 @@ def get_cookies_list():
     return_list = []
     for l in lines:
         l_list = l.split('----')
-        return_list.append(l_list[-1])
+        return_list.append(l_list[-1].strip())
     return return_list
 
 cookies_list = get_cookies_list()
@@ -83,9 +83,13 @@ def report(description, keyword, surl, title):
          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3013.3 Safari/537.36',
          'X-Requested-With': 'XMLHttpRequest'
            }
-    cookies = {'BDUSS': random.choices(cookies_list)}
+    cookies = {'BDUSS': random.choice(cookies_list)}
     url = 'http://jubao.baidu.com/jubao/accu/submit'
-    r = requests.post(url, cookies=cookies, data=data, headers=headers)
+    r = requests.post(url, cookies=cookies, data=data, headers=headers).json()
+    if r['status'] == 0:
+        print(r)
+    else:
+        print('EREER:\n', r)
 
 
 def get_baidu_keyword(damain):
@@ -113,7 +117,13 @@ def get_baidu_keyword(damain):
 #             break
 #         print(i)
 #         report('色情网站', i[0], i[1], i[2])
-
+damain = 'jijise.cn'
+list_r = get_url_list('成人动漫', 0)
+for i in list_r:
+    if damain in i[1]:
+        break
+    print(i)
+    report('色情网站', i[0], i[1], i[2])
 
 
 # headers = {'Referer': 'http://i.baidu.com/my/jubao'}
